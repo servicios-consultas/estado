@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReFE - Validación de Títulos</title>
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+body {
+    background-color: #f4f6f8;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+header {
+    text-align: left;
+    margin: 20px 0;
+    background-color:#37BBED;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header img {
+    max-height: 50px;
+    margin-bottom: 10px;
+}
+header h1, header h2 {
+    color: #fff;
+    margin: 0;
+    align-self: flex-start;
+}
+header h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+header h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+.student-info {
+    background-color: #37BBED;
+    color: #fff;
+    padding: 12px 18px 6px 18px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+#nivelEducativo {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #00aaff;
+}
+table {
+    background-color: #fff;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+table th {
+    background-color: #37BBED;
+    color: #fff;
+    font-weight: 600;
+}
+table td, table th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+}
+table tbody tr:nth-child(even) {
+    background-color: #d1ebfc;
+}
+table tbody tr:nth-child(odd) {
+    background-color: #b3dcf7;
+}
+table tbody tr:hover {
+    background-color: #e8f0fe;
+}
+.modal-header h3 {
+    margin: 0;
+}
+.certificate-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.certificate-badge img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+.certificate-text h2 {
+    margin-top: 0;
+}
+.certificate-text p {
+    font-size: 15px;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+@media (max-width: 768px) {
+    .certificate-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .certificate-badge img {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    .certificate-text h2 {
+        font-size: 18px;
+    }
+    .certificate-text p {
+        font-size: 14px;
+    }
+    .modal-content {
+        border-radius: 10px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <img src="https://refe.educacion.gob.ar/img/ReFE/Banner/ReFE-Banner.svg" width="330px" alt="ReFE Logo">
+    <h1>Dirección de Validez Nacional de Títulos y Estudios</h1>
+    <h2>Registro Federal de Egreso</h2>
+</header>
+
+<main class="container my-4">
+    <form id="form-busqueda" class="mb-3">
+        <div class="input-group mb-2">
+            <span class="input-group-text text-secondary" style="width: 250px;">Tipo de Documento</span>
+            <select class="form-control form-select" id="tipoDoc">
+                <option value="">-- Selecciona una opción --</option>
+                <option>DNI</option>
+                <option>LE</option>
+                <option>LC</option>
+                <option>DOCUMENTO EXTRANJERO</option>
+            </select>
+        </div>
+        <div class="input-group mb-2">
+            <span class="input-group-text text-secondary" style="width: 250px;">Número de Documento</span>
+            <input class="form-control" type="text" id="numeroDoc" placeholder="Ingrese DNI">
+        </div>
+        <div class="input-group mb-2">
+            <span class="input-group-text text-secondary" style="width: 250px;">Apellido</span>
+            <input class="form-control" type="text" id="apellido">
+        </div>
+        <div class="input-group mb-2">
+            <span class="input-group-text text-secondary" style="width: 250px;">Nombre</span>
+            <input class="form-control" type="text" id="nombre">
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6 text-end">
+                <a href="#" id="nuevaBusqueda" class="btn btn-primary me-2" style="width: 200px;">Nueva búsqueda</a>
+                <button type="button" class="btn btn-success" style="width: 200px; border-color: #88C517; background-color: #88C517;" id="buscarBtn">Buscar</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="infoEstudiante" style="display:none;">
+        <div class="student-info" id="studentName"></div>
+        <p><span id="nivelEducativo"></span></p>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tipo de Documento</th>
+                        <th>N° de Documento</th>
+                        <th>Título</th>
+                        <th>Jurisdicción</th>
+                        <th>Institución Educativa</th>
+                        <th>CUE</th>
+                        <th>Fecha de Egreso</th>
+                        <th>Normativa Jurisdiccional</th>
+                        <th>Normativa Nacional</th>
+                        <th>N° de Serie</th>
+                        <th>Blockchain</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody"></tbody>
+            </table>
+        </div>
+        <p style="font-size: 14px; color: #555;">
+        A partir del 1 de noviembre de 2020, por Resolución CFE N° 440/23, los títulos son emitidos en formato digital. Para títulos emitidos desde esa fecha, el ReFE es el nuevo instrumento de legalización, certificación y confronte de autenticidad de la documentación educativa correspondiente a los niveles de educación secundaria y de educación superior, para su presentación dentro del territorio argentino. Para títulos emitidos con anterioridad, consultar el circuito de legalización.
+        </p>
+    </div>
+</main>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+let datosEstudiantes = [
+    {
+        dni:"28262658",
+        nombre:"MARCELO DOMINGO GUTIÉRREZ ",
+        nivel:"SECUNDARIO (ONLINE)",
+        tipoDoc:"DNI",
+        titulo:"BACHILLER",
+        jurisdiccion:"SANTA LUCIA - SAN JUAN",
+        institucion:"INSTITUTO ESBA",
+        cue:"00612275",
+        fechaEgreso:"05/12/2024",
+        normativaJur:"RESOLUCIÓN N° 302/12",
+        normativaNac:"R.M. Nº 1466/18-R.M. Nº 2206/22-DISP. N° 723/22.",
+        serie:"06-08336-2024",
+        hash:"0xc2d634539b3fd9dddce972cdc342febd2d4b162eec7f6dade5fe049402047963",
+        autoridad:"LLERAL Máxima Andre",
+        fechaSello:"11/01/2026 00:00:18"
+    },
+     ];
+
+document.getElementById('buscarBtn').addEventListener('click', function() {
+    const dniInput = document.getElementById('numeroDoc').value.trim();
+    const resultado = datosEstudiantes.find(e => e.dni === dniInput);
+    if (!resultado) {
+        alert("No se encontró el DNI ingresado.");
+        document.getElementById('infoEstudiante').style.display = "none";
+        return;
+    }
+
+    document.getElementById('infoEstudiante').style.display = "block";
+    document.getElementById('studentName').textContent = resultado.nombre;
+    document.getElementById('nivelEducativo').innerHTML = `<span id="nivelLabel">Nivel Educativo:</span> ${resultado.nivel}`;
+
+    document.getElementById('tipoDoc').value = resultado.tipoDoc || 'DNI';
+    document.getElementById('nombre').value = resultado.nombre.split(' ').slice(-1).join(' ');
+    document.getElementById('apellido').value = resultado.nombre.split(' ').slice(0,-1).join(' ');
+
+    const tablaBody = document.getElementById('tablaBody');
+    const modalId = "modal-" + resultado.dni;
+    const prevModal = document.getElementById(modalId);
+    if (prevModal) prevModal.remove();
+
+    const modalHTML = `
+    <div class="modal fade" id="${modalId}" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Blockchain Nacional del Sistema Nacional de Títulos</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="certificate-header">
+              <div class="certificate-badge">
+                <img src="https://refe.educacion.gob.ar/img/icons/certificate.svg" alt="Certificado MINED" class="img-fluid">
+              </div>
+              <div class="certificate-text">
+                <h2>Ministerio de Educación de la República Argentina</h2>
+                <p>Certificado MINED Títulos digitales - está vigente</p>
+                <p>Hash Blockchain Federal Argentina:<br>
+                  <span>${resultado.hash}</span>
+                </p>
+                <p><strong>Autoridad Firmante:</strong> ${resultado.autoridad}</p>
+                <p><strong>Fecha Sello de Tiempo:</strong> ${resultado.fechaSello}</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    tablaBody.innerHTML = `
+        <tr>
+            <td>${resultado.tipoDoc}</td>
+            <td>${resultado.dni}</td>
+            <td>${resultado.titulo}</td>
+            <td>${resultado.jurisdiccion}</td>
+            <td>${resultado.institucion}</td>
+            <td>${resultado.cue}</td>
+            <td>${resultado.fechaEgreso}</td>
+            <td>${resultado.normativaJur}</td>
+            <td>${resultado.normativaNac}</td>
+            <td>${resultado.serie}</td>
+            <td class="text-center"><img src="https://refe.educacion.gob.ar/img/ReFE/ico-blockchain.svg" style="height:20px;" alt="Blockchain Logo"></td>
+            <td><button class="btn btn-info btn-sm" onclick="abrirModal('${modalId}')"><i class='fas fa-eye'></i> Ver</button></td>
+        </tr>
+    `;
+});
+
+function abrirModal(modalId) {
+    const modalEl = document.getElementById(modalId);
+    if (!modalEl) return;
+    const modal = new bootstrap.Modal(modalEl);
+    modal.show();
+}
+
+document.getElementById('nuevaBusqueda').addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('form-busqueda').reset();
+    document.getElementById('infoEstudiante').style.display = "none";
+    document.getElementById('tablaBody').innerHTML = '';
+    document.querySelectorAll('div.modal[id^="modal-"]').forEach(m => m.remove());
+});
+</script>
+
+</body>
+             </html>
+             
