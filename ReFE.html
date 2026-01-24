@@ -233,8 +233,10 @@ document.getElementById('buscarBtn').addEventListener('click', function() {
     document.getElementById('nivelEducativo').innerHTML = `<span id="nivelLabel">Nivel Educativo:</span> ${resultado.nivel}`;
 
     document.getElementById('tipoDoc').value = resultado.tipoDoc || 'DNI';
-    document.getElementById('nombre').value = resultado.nombre.split(' ').slice(-1).join(' ');
-    document.getElementById('apellido').value = resultado.nombre.split(' ').slice(0,-1).join(' ');
+    const partes = resultado.nombre.trim().split(/\s+/);
+
+document.getElementById('apellido').value = partes.pop();
+document.getElementById('nombre').value = partes.join(' ');
 
     const tablaBody = document.getElementById('tablaBody');
     const modalId = "modal-" + resultado.dni;
