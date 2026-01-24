@@ -130,7 +130,7 @@ Enviar Solicitud
 
 <!-- RESUMEN -->
 <div id="resumen" style="display:none;">
-<h5>✅ Resumen de su Solicitud</h5>
+<h5>✅ Resumen de Solicitud</h5>
 <div id="resumenContenido"></div>
 <div class="text-end mt-3">
 <button id="enviarWhatsApp" class="btn btn-success" style="background:#88C517;border-color:#88C517;">
@@ -149,7 +149,7 @@ document.getElementById("formLegalizacion").addEventListener("submit", e => {
 
     const campos = document.querySelectorAll("#formLegalizacion input, select");
     let resumen = "";
-    let mensaje = "*Solicitud de Legalización*\n\n";
+    let mensaje = "*Solicitud de Emisión*\n\n";
 
     campos.forEach(c => {
         if (c.value) {
