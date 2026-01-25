@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Consulta de Infracciones</title>
 
-<!-- Tipografía oficial-style -->
+<!-- Tipografía oficial -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --azul-principal:#0a4fa3;
-  --azul-header:#063b78;
-  --gris-fondo:#eef1f4;
-  --gris-borde:#d1d5db;
-  --texto:#1f2933;
+  --azul-principal:#0b4ea2;
+  --azul-secundario:#063b78;
+  --gris-fondo:#f1f3f6;
+  --gris-borde:#d9dee5;
+  --texto:#2b2b2b;
+  --verde:#2e7d32;
+  --rojo:#c62828;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
@@ -32,26 +32,26 @@ body{
 .header-top{
   background:var(--azul-principal);
   color:#fff;
-  padding:8px 20px;
+  padding:6px 24px;
   font-size:13px;
   font-weight:400;
 }
 
 .header-main{
-  background:var(--azul-header);
-  padding:18px 20px;
+  background:var(--azul-secundario);
+  padding:22px 24px;
 }
 
 .header-main h1{
   margin:0;
-  font-size:24px;
+  font-size:26px;
   font-weight:500;
 }
 
 /* CONTENEDOR */
-.wrapper{
-  max-width:680px;
-  margin:40px auto;
+.container{
+  max-width:720px;
+  margin:42px auto;
   padding:0 16px;
 }
 
@@ -59,72 +59,78 @@ body{
 .card{
   background:#fff;
   border:1px solid var(--gris-borde);
-  border-radius:3px;
-  padding:28px;
+  border-radius:4px;
+  padding:32px;
 }
 
-/* TITULO SECCION */
-.section-title{
-  font-size:18px;
+/* TITULO */
+.card h2{
+  margin:0 0 26px 0;
+  font-size:20px;
   font-weight:500;
-  margin-bottom:20px;
 }
 
 /* FORM */
 label{
-  display:block;
   font-size:14px;
   font-weight:500;
+  display:block;
   margin-bottom:6px;
 }
 
 input{
   width:100%;
-  padding:12px;
+  padding:14px;
   font-size:16px;
   border:1px solid var(--gris-borde);
-  border-radius:2px;
+  border-radius:3px;
 }
 
 input::placeholder{
-  color:#9ca3af;
+  color:#9aa0a6;
 }
 
 button{
-  margin-top:18px;
-  padding:12px 24px;
-  font-size:15px;
-  font-weight:500;
+  margin-top:22px;
   background:var(--azul-principal);
   color:#fff;
   border:none;
-  border-radius:2px;
+  padding:14px 32px;
+  font-size:15px;
+  font-weight:500;
+  border-radius:3px;
   cursor:pointer;
 }
 
 button:hover{
-  background:#083d80;
+  background:#093f85;
 }
 
-/* RESULTADOS */
+/* RESULTADO */
 .resultado{
-  margin-top:30px;
+  margin-top:36px;
   border-top:1px solid var(--gris-borde);
-  padding-top:20px;
+  padding-top:26px;
+}
+
+.resultado p{
+  margin:7px 0;
+  font-size:15px;
 }
 
 .estado-ok{
-  color:#15803d;
+  color:var(--verde);
   font-weight:600;
 }
 
 .estado-error{
-  color:#b91c1c;
+  color:var(--rojo);
   font-weight:600;
 }
 
-.footer-text{
-  margin-top:15px;
+/* TEXTO LEGAL */
+.disclaimer{
+  margin-top:18px;
   font-size:12px;
   color:#6b7280;
 }
@@ -140,13 +146,13 @@ button:hover{
 </div>
 
 <!-- CONTENIDO -->
-<div class="wrapper">
+<div class="container">
   <div class="card">
 
-    <div class="section-title">Consultar infracciones</div>
+    <h2>Consultar infracciones</h2>
 
-    <label>Documento o Matrícula</label>
-    <input type="text" id="dato" placeholder="Ingresá DNI o número de matrícula">
+    <label>DNI o Matrícula</label>
+    <input type="text" id="dato" placeholder="Ingresá número de documento o matrícula">
 
     <button onclick="consultar()">Consultar</button>
 
@@ -156,6 +162,7 @@ button:hover{
 </div>
 
 <script>
+/* DATOS DE EJEMPLO — AGREGÁS LOS TUYOS */
 const registros = [
   {
     dni:"23000666",
@@ -178,7 +185,11 @@ function consultar(){
   const res = document.getElementById("resultado");
   res.innerHTML = "";
 
-  const r = registros.find(x => x.dni === valor || x.matricula === valor);
+  if(!valor) return;
+
+  const r = registros.find(x =>
+    x.dni === valor || x.matricula === valor
+  );
 
   if(!r){
     res.innerHTML = `<p class="estado-error">No se encontraron infracciones.</p>`;
@@ -196,8 +207,8 @@ function consultar(){
     </p>
     <p>${r.detalle}</p>
 
-    <div class="footer-text">
-      La información consultada es de carácter informativo.
+    <div class="disclaimer">
+      La información exhibida tiene carácter informativo.
     </div>
   `;
 }
