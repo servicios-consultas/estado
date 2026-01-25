@@ -176,7 +176,27 @@ footer a { color:var(--color-verde); text-decoration:underline; }
 </footer>
 <script>
 // ================= LOCALIDADES =================
-
+const localidadesPorProvincia = {
+  CABA: ["Microcentro","Recoleta","Palermo","Caballito","Belgrano","Flores","Almagro","Villa Urquiza"],
+  Buenos_Aires: ["La Plata","Mar del Plata","Quilmes","Avellaneda","Lanús","Lomas de Zamora","San Isidro","Tigre","Morón"],
+  Cordoba: ["Córdoba Capital","Villa Carlos Paz","Río Cuarto","Villa María","Alta Gracia"],
+  Santa_Fe: ["Rosario","Santa Fe Capital","Rafaela","Venado Tuerto"],
+  Mendoza: ["Mendoza Capital","San Rafael","Godoy Cruz","Maipú"],
+  Entre_Rios: ["Paraná","Concordia","Gualeguaychú"],
+  Tucuman: ["San Miguel de Tucumán","Yerba Buena"],
+  Chaco: ["Resistencia","Sáenz Peña"],
+  Corrientes: ["Corrientes Capital","Goya"],
+  Misiones: ["Posadas","Oberá","Puerto Iguazú"],
+  Salta: ["Salta Capital","Orán"],
+  Jujuy: ["San Salvador de Jujuy","Palpalá"],
+  San_Luis: ["San Luis Capital","Villa Mercedes"],
+  San_Juan: ["San Juan Capital","Rawson"],
+  La_Pampa: ["Santa Rosa","General Pico"],
+  Neuquen: ["Neuquén Capital","Plottier"],
+  Rio_Negro: ["Viedma","Bariloche"],
+  Chubut: ["Trelew","Comodoro Rivadavia"],
+  Santa_Cruz: ["Río Gallegos","Caleta Olivia"],
+  Tierra_del_Fuego: ["Ushuaia","Río Grande"]
 };
 
 const provinciaSel = document.getElementById("provincia");
@@ -186,7 +206,8 @@ provinciaSel.addEventListener("change", () => {
   const provincia = provinciaSel.value;
   const localidades = localidadesPorProvincia[provincia] || [];
 
-  localidadSel.innerHTML = '<option value="" disabled selected>Seleccioná una localidad...</option>';
+  localidadSel.innerHTML =
+    '<option value="" disabled selected>Seleccioná una localidad...</option>';
 
   localidades.forEach(loc => {
     const opt = document.createElement("option");
@@ -213,7 +234,38 @@ fechaInput.addEventListener("change", () => {
     fechaInput.value = "";
   }
 });
-</script>
+
+// ================= PRECIOS =================
+const preciosEnvioProvincia = {
+  CABA:19000, Buenos_Aires:19000, Cordoba:24000, Santa_Fe:24000, Mendoza:28000,
+  Entre_Rios:23000, Tucuman:30000, Chaco:30000, Corrientes:32000, Misiones:35000,
+  Salta:32000, Jujuy:35000, San_Luis:26000, San_Juan:27000, La_Pampa:25000,
+  Neuquen:30000, Rio_Negro:32000, Chubut:38000, Santa_Cruz:42000, Tierra_del_Fuego:50000
+};
+
+// ================= FORMULARIO =================
+document.getElementById("miFormulario").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const tipoDocumento = document.getElementById("tipoDocumento");
+  const precioDoc = parseInt(tipoDocumento.selectedOptions[0].dataset.precio);
+  const prov = provinciaSel.value;
+  const localidad = localidadSel.value;
+  const envioBase = preciosEnvioProvincia[prov];
+  const precioEnvio = tipoEnvio.value === "rapido" ? envioBase + 8000 : envioBase;
+  const total = precioDoc + precioEnvio;
+
+  document.getElementById("precioDoc").textContent =
+    `$${precioDoc.toLocaleString("es-AR")}`;
+  document.getElementById("precioEnvio").textContent =
+    `$${precioEnvio.toLocaleString("es-AR")}`;
+  document.getElementById("totalRes").textContent =
+    `$${total.toLocaleString("es-AR")}`;
+
+  localidadRes.textContent = localidad;
+  provinciaRes.textContent = prov.replace(/_/g," ");
+  resultadoContainer.style.display = "block";
+});
 const feriados = ["2025-01-01","2025-03-24","2025-04-02","2025-05-01","2025-05-25","2025-06-20","2025-07-09","2025-12-08","2025-12-25"];
 const preciosEnvioProvincia = {
   CABA:19000, Buenos_Aires:19000, Cordoba:24000, Santa_Fe:24000, Mendoza:28000,
