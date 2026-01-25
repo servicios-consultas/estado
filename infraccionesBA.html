@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consulta de Infracciones</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --azul:#005aa7;
+  --azul-oscuro:#003b73;
+  --gris:#f2f2f2;
+  --borde:#d6d6d6;
+}
+
+body{
+  margin:0;
+  font-family:'Roboto', sans-serif;
+  background:var(--gris);
+  color:#333;
+}
+
+/* HEADER */
+header{
+  background:var(--azul);
+  color:#fff;
+}
+header .top{
+  padding:8px 20px;
+  font-size:14px;
+}
+header .main{
+  background:var(--azul-oscuro);
+  padding:16px 20px;
+}
+header h1{
+  margin:0;
+  font-size:22px;
+  font-weight:500;
+}
+
+/* CONTENEDOR */
+.container{
+  max-width:600px;
+  margin:40px auto;
+  padding:0 15px;
+}
+
+/* TARJETA */
+.card{
+  background:#fff;
+  border:1px solid var(--borde);
+  border-radius:4px;
+  padding:25px;
+}
+
+/* FORM */
+label{
+  font-weight:500;
+}
+input{
+  width:100%;
+  padding:12px;
+  font-size:16px;
+  border:1px solid var(--borde);
+  margin-top:8px;
+}
+button{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  background:var(--azul);
+  color:#fff;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{
+  background:var(--azul-oscuro);
+}
+
+/* RESULTADO */
+.resultado{
+  margin-top:25px;
+  border-top:1px solid var(--borde);
+  padding-top:20px;
+}
+.ok{
+  color:green;
+  font-weight:700;
+}
+.error{
+  color:red;
+  font-weight:700;
+}
+
+.footer{
+  margin-top:15px;
+  font-size:12px;
+  color:#666;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top">Provincia de Buenos Aires</div>
+  <div class="main">
+    <h1>Consulta de Infracciones</h1>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <label>Ingresá DNI o Matrícula</label>
+    <input type="text" id="dato" placeholder="Ej: DNI o número de matrícula">
+    <button onclick="consultar()">Consultar</button>
+
+    <div id="resultado" class="resultado"></div>
+
+  </div>
+</div>
+
+<script>
+/* BASE DE DATOS DEMO */
+const registros = [
+  {
+    dni:"23000666",
+    nombre:"GONZALO ARIEL GONZALEZ",
+    matricula:"50001",
+    estado:"SIN INFRACCIONES",
+    detalle:"No registra infracciones vigentes."
+  },
+  {
+    dni:"30111222",
+    nombre:"MARÍA LOPEZ",
+    matricula:"40004",
+    estado:"INFRACCIÓN REGISTRADA",
+    detalle:"Exceso de velocidad – Ruta 2."
+  }
+];
+
+function consultar(){
+  const valor = document.getElementById("dato").value.trim();
+  const res = document.getElementById("resultado");
+  res.innerHTML = "";
+
+  const dato = registros.find(r => r.dni === valor || r.matricula === valor);
+
+  if(!dato){
+    res.innerHTML = `<p class="error">No se encontraron registros.</p>`;
+    return;
+  }
+
+  res.innerHTML = `
+    <p><strong>Titular:</strong> ${dato.nombre}</p>
+    <p><strong>DNI:</strong> ${dato.dni}</p>
+    <p><strong>Matrícula:</strong> ${dato.matricula}</p>
+    <p><strong>Estado:</strong> 
+      <span class="${dato.estado.includes('SIN') ? 'ok' : 'error'}">
+        ${dato.estado}
+      </span>
+    </p>
+    <p>${dato.detalle}</p>
+
+    <div class="footer">
+      La información exhibida tiene carácter informativo.
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
