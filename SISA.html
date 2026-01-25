@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consulta de Profesionales | Salud</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --azul-sisa:#005aa7;
+  --azul-oscuro:#003b73;
+  --gris:#f4f6f8;
+  --borde:#dcdcdc;
+  --verde:#2e7d32;
+  --rojo:#c62828;
+}
+
+body {
+  margin:0;
+  font-family:'Roboto', sans-serif;
+  background:var(--gris);
+  color:#333;
+}
+
+/* HEADER */
+header {
+  background:var(--azul-sisa);
+  color:#fff;
+}
+header .top {
+  padding:12px 20px;
+  font-size:14px;
+}
+header .main {
+  background:var(--azul-oscuro);
+  padding:18px 20px;
+}
+header h1 {
+  margin:0;
+  font-size:22px;
+  font-weight:500;
+}
+
+/* CONTENEDOR */
+.container {
+  max-width:900px;
+  margin:30px auto;
+  padding:0 15px;
+}
+
+/* BUSCADOR */
+.search-box {
+  background:#fff;
+  padding:20px;
+  border:1px solid var(--borde);
+  border-radius:4px;
+}
+.search-box label {
+  font-weight:500;
+}
+.search-box input {
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  font-size:16px;
+  border:1px solid var(--borde);
+}
+.search-box button {
+  background:var(--azul-sisa);
+  color:#fff;
+  border:none;
+  padding:10px 20px;
+  font-size:15px;
+  cursor:pointer;
+}
+.search-box button:hover {
+  background:var(--azul-oscuro);
+}
+
+/* RESULTADOS */
+.card {
+  background:#fff;
+  margin-top:25px;
+  border:1px solid var(--borde);
+  border-radius:4px;
+}
+.card-header {
+  background:#eef3f7;
+  padding:12px 15px;
+  font-weight:500;
+}
+.card-body {
+  padding:15px;
+}
+.row {
+  display:flex;
+  flex-wrap:wrap;
+}
+.col {
+  width:50%;
+  padding:6px 0;
+}
+.full {
+  width:100%;
+}
+
+.estado-ok {
+  color:var(--verde);
+  font-weight:700;
+}
+.estado-baja {
+  color:var(--rojo);
+  font-weight:700;
+}
+
+hr {
+  border:none;
+  border-top:1px solid var(--borde);
+  margin:15px 0;
+}
+
+.footer-note {
+  font-size:12px;
+  color:#666;
+  margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top">Ministerio de Salud</div>
+  <div class="main">
+    <h1>Registro Federal de Profesionales de la Salud</h1>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="search-box">
+    <label>Buscar por DNI o Matrícula</label>
+    <input type="text" id="busqueda" placeholder="Ingrese número de DNI o matrícula">
+    <button onclick="buscar()">Consultar</button>
+  </div>
+
+  <div id="resultado"></div>
+
+</div>
+
+<script>
+const profesionales = [
+  {
+    dni: "23000666",
+    nombre: "GONZALO ARIEL",
+    apellido: "GONZALEZ",
+    profesion: "Médico",
+    codigo: "541000000003",
+    matriculas: [
+      {
+        numero: "40004",
+        jurisdiccion: "Buenos Aires",
+        estado: "Baja temporal",
+        especialidad: "Salud Pública"
+      },
+      {
+        numero: "50001",
+        jurisdiccion: "CABA",
+        estado: "Habilitado",
+        especialidad: "-"
+      },
+      {
+        numero: "40004",
+        jurisdiccion: "Buenos Aires",
+        estado: "Habilitado",
+        especialidad: "Salud Pública"
+      }
+    ]
+  }
+];
+
+function buscar() {
+  const valor = document.getElementById("busqueda").value.trim();
+  const cont = document.getElementById("resultado");
+  cont.innerHTML = "";
+
+  if (!valor) return;
+
+  const prof = profesionales.find(p =>
+    p.dni === valor ||
+    p.matriculas.some(m => m.numero === valor)
+  );
+
+  if (!prof) {
+    cont.innerHTML = `<div class="card"><div class="card-body">No se encontraron resultados.</div></div>`;
+    return;
+  }
+
+  let html = `
+    <div class="card">
+      <div class="card-header">Datos del profesional</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col"><strong>Apellido y Nombre:</strong> ${prof.apellido}, ${prof.nombre}</div>
+          <div class="col"><strong>DNI:</strong> ${prof.dni}</div>
+          <div class="col"><strong>Profesión:</strong> ${prof.profesion}</div>
+          <div class="col"><strong>Código:</strong> ${prof.codigo}</div>
+        </div>
+
+        <hr>
+        <strong>Matrículas registradas</strong>
+        <hr>
+  `;
+
+  prof.matriculas.forEach(m => {
+    html += `
+      <div class="row">
+        <div class="col"><strong>Matrícula:</strong> ${m.numero}</div>
+        <div class="col"><strong>Jurisdicción:</strong> ${m.jurisdiccion}</div>
+        <div class="col"><strong>Estado:</strong>
+          <span class="${m.estado === 'Habilitado' ? 'estado-ok' : 'estado-baja'}">${m.estado}</span>
+        </div>
+        <div class="col"><strong>Especialidad:</strong> ${m.especialidad}</div>
+      </div>
+      <hr>
+    `;
+  });
+
+  html += `
+        <div class="footer-note">
+          La información exhibida surge de registros oficiales declarados por las jurisdicciones.
+        </div>
+      </div>
+    </div>
+  `;
+
+  cont.innerHTML = html;
+}
+</script>
+
+</body>
+</html>
