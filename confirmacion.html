@@ -54,9 +54,10 @@ footer a { color:var(--color-verde); text-decoration:underline; }
         <label for="tipoDocumento">Tipo de documentación</label>
         <select id="tipoDocumento" class="form-control">
           <option value="" disabled selected>Seleccioná una opción...</option>
-          <option value="Certificado" data-precio="150000">Certificado ($150.000)</option>
-          <option value="Título" data-precio="50000">Título ($50.000)</option>
-          <option value="Legalización" data-precio="80000">Digitalización ($80.000)</option>
+          <option value="Certificado" data-precio="100000">Analítico y Título (Secundario) $100.000</option>
+          <option value="Título" data-precio="130000">Analítico y Título (Universitario) $130.000</option>
+          <option value="Terciario" data-precio="150000">Analítico y Título (Terciario) $150.000</option>
+          <option value="Legalización" data-precio="190000">Matrícula $190.000</option>
         </select>
       </div>
 
@@ -146,7 +147,7 @@ footer a { color:var(--color-verde); text-decoration:underline; }
       <div class="form-group">
         <label for="tipoEnvio">Tipo de envío</label>
         <select id="tipoEnvio" class="form-control">
-          <option value="estandar">Estándar (3 a 5 días hábiles)</option>
+          <option value="estandar">Estándar (5 días hábiles)</option>
           <option value="rapido">Rápido (24hs)</option>
         </select>
       </div>
@@ -164,7 +165,7 @@ footer a { color:var(--color-verde); text-decoration:underline; }
       <div class="card p-3 mb-2" style="background-color:#e3f2fd; color:#1565c0;">
         <strong>TOTAL:</strong> <span id="totalRes"></span>
       </div>
-      <button class="btn btn-whatsapp" id="btnWhatsApp">💳 ABONAR ENVÍO</button>
+      <button class="btn btn-whatsapp" id="btnWhatsApp">ABONAR ENVÍO</button>
     </div>
 
   </div>
@@ -172,8 +173,32 @@ footer a { color:var(--color-verde); text-decoration:underline; }
 
 <footer>
   <div><a href="#">Inicio</a> | <a href="#">Seguimiento</a> | <a href="#">Contacto</a></div>
-  <div class="mt-2">© 2025 DOCUTRACKING - Todos los derechos reservados.</div>
+  <div class="mt-2">© 2026 DOCUTRACKING - Todos los derechos reservados.</div>
 </footer>
+<script>
+// Localidades por provincia
+const localidadesPorProvincia = {
+  "CABA": ["Microcentro","Recoleta","Palermo","Caballito","Belgrano","San Telmo","Balvanera","Flores","Almagro","Villa Urquiza","Villa Devoto","Villa Lugano","La Boca","Liniers","Parque Patricios","Boedo","Villa Crespo","Chacarita","Monserrat","Retiro","Puerto Madero"],
+  "Buenos_Aires": ["La Plata","Mar del Plata","Bahía Blanca","Quilmes","Avellaneda","Lanús","Lomas de Zamora","San Isidro","Tigre","Morón","Merlo","Pilar","San Martín","Tres de Febrero","Esteban Echeverría","Ezeiza","Florencio Varela","Berazategui","Ituzaingó","Vicente López","Campana","Zárate","Necochea","Junín","Pergamino","Olavarría","Chivilcoy","Tandil","Balcarce","Pinamar","Villa Gesell","San Nicolás","Luján","Moreno","Almirante Brown","Hurlingham","San Miguel","Berisso","Ensenada","Brandsen","Cañuelas","General Rodríguez"],
+  "Cordoba": ["Córdoba Capital","Villa María","Río Cuarto","San Francisco","Alta Gracia","Jesús María","La Calera","Villa Carlos Paz"],
+  "Santa_Fe": ["Rosario","Santa Fe Capital","Rafaela","Venado Tuerto","Reconquista","Esperanza"],
+  "Mendoza": ["Mendoza Capital","San Rafael","Godoy Cruz","Maipú","Luján de Cuyo","Tunuyán"],
+  "Entre_Rios": ["Paraná","Concordia","Gualeguaychú","Concepción del Uruguay","Villaguay"],
+  "Tucuman": ["San Miguel de Tucumán","Yerba Buena","Tafí Viejo","Concepción"],
+  "Chaco": ["Resistencia","Sáenz Peña","Villa Ángela","Charata"],
+  "Corrientes": ["Corrientes Capital","Goya","Paso de los Libres"],
+  "Misiones": ["Posadas","Oberá","Eldorado","Puerto Iguazú"],
+  "Salta": ["Salta Capital","Cafayate","Orán","Rosario de la Frontera"],
+  "Jujuy": ["San Salvador de Jujuy","Palpalá","Perico","Humahuaca"],
+  "San_Luis": ["San Luis Capital","Villa Mercedes","Merlo"],
+  "San_Juan": ["San Juan Capital","Rivadavia","Rawson","Chimbas"],
+  "La_Pampa": ["Santa Rosa","General Pico","Toay"],
+  "Neuquen": ["Neuquén Capital","Plottier","Centenario","Zapala"],
+  "Rio_Negro": ["Viedma","General Roca","Cipolletti","Bariloche"],
+  "Chubut": ["Rawson","Trelew","Comodoro Rivadavia","Puerto Madryn"],
+  "Santa_Cruz": ["Río Gallegos","Caleta Olivia","El Calafate"],
+  "Tierra_del_Fuego": ["Ushuaia","Río Grande","Tolhuin"]
+};
 
 <script>
 const feriados = ["2025-01-01","2025-03-24","2025-04-02","2025-05-01","2025-05-25","2025-06-20","2025-07-09","2025-12-08","2025-12-25"];
