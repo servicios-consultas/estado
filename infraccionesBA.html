@@ -1,35 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Consulta de infracciones de tránsito</title>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WRB24B');
+  </script>
+
+  <meta charset="utf-8">
+  <title>Consulta de infracciones</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap + BA -->
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <script src="./assets/js/jquery.min.js"></script>
-  <script src="./assets/js/bootstrap.bundle.min.js"></script>
+  <!-- Obelisco -->
+  <link rel="stylesheet" href="./assets/css/obelisco.css">
+  <link rel="stylesheet" href="./assets/css/scoring.css">
+
+  <style>
+    a.card {
+      text-decoration: none;
+      color: inherit;
+    }
+    a.card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,.12);
+      transform: translateY(-2px);
+      transition: all .2s ease;
+    }
+    .card-form {
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER SUPERIOR ================= -->
-<header class="bg-white border-bottom">
-  <div class="container py-2 d-flex align-items-center">
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WRB24B"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<header class="navbar navbar-light navbar-expand-lg navbar-lg">
+  <div class="container">
     <a class="navbar-brand" href="https://www.buenosaires.gob.ar/">
-      <img src="./assets/img/logoBA.svg" alt="Buenos Aires" height="40">
+      <img class="header-logo" src="./assets/img/logoBA.svg" alt="Ciudad de Buenos Aires">
     </a>
   </div>
 </header>
 
-<!-- ================= BREADCRUMB + TITULO ================= -->
-<section class="bg-light py-4">
+<main>
+<article>
+
+<header class="bg-light pt-4 pb-4 mb-4">
   <div class="container">
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mb-2">
+      <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Buenos Aires</a></li>
         <li class="breadcrumb-item"><a href="#">Justicia y Seguridad</a></li>
         <li class="breadcrumb-item"><a href="#">Infracciones</a></li>
@@ -38,128 +72,111 @@
     </nav>
 
     <h1 class="mb-2">Consulta de infracciones de tránsito y scoring</h1>
-    <p class="lead mb-0">
-      Accedé a la información de tránsito pendiente de pago y tu puntaje,
-      en la ciudad de Buenos Aires.
+    <p class="lead">
+      Accedé a la información de tránsito pendiente de pago y tu puntaje en la Ciudad de Buenos Aires.
     </p>
   </div>
-</section>
+</header>
 
-<!-- ================= CONTENIDO PRINCIPAL ================= -->
-<main class="container my-5">
-  <div class="row">
+<div class="container">
+<section class="mb-5">
 
-    <!-- COLUMNA IZQUIERDA -->
-    <div class="col-12 col-lg-8">
+<div class="alert alert-info">
+  Recordá que podés tener <a href="#">actas de varios</a> que pueden impedirte realizar trámites.
+</div>
 
-      <!-- ALERTA -->
-      <div class="alert alert-info">
-        Recordá que podés tener
-        <a href="#">actas de varios</a>
-        que pueden impedirte realizar algunos trámites.
-      </div>
+<form class="mt-4">
 
-      <!-- FORMULARIO -->
-      <form method="POST" action="index.php">
+<div class="card card-form p-4">
+  <h3>Quiero datos sobre</h3>
 
-        <div class="card p-4 mb-4">
-          <h3 class="mb-3">Quiero datos sobre</h3>
-
-          <!-- RADIO -->
-          <div class="d-flex mb-3">
-            <div class="custom-control custom-radio mr-4">
-              <input type="radio" id="radio-doc" name="tipo_consulta" class="custom-control-input" checked>
-              <label class="custom-control-label" for="radio-doc">Un documento</label>
-            </div>
-
-            <div class="custom-control custom-radio">
-              <input type="radio" id="radio-dom" name="tipo_consulta" class="custom-control-input">
-              <label class="custom-control-label" for="radio-dom">Una patente</label>
-            </div>
-          </div>
-
-          <!-- DOCUMENTO -->
-          <div id="panel-documento">
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label>Tipo de documento*</label>
-                <select class="custom-select">
-                  <option>DNI</option>
-                  <option>CUIT</option>
-                  <option>CI</option>
-                  <option>LC</option>
-                  <option>LE</option>
-                  <option>PAS</option>
-                </select>
-              </div>
-
-              <div class="form-group col-md-6">
-                <label>Número de documento*</label>
-                <input type="number" class="form-control">
-              </div>
-            </div>
-
-            <small class="text-muted">
-              Si tu DNI es menor a 10.000.000 utilizá LE o LC.
-              <a href="#">Términos y condiciones</a>
-            </small>
-          </div>
-
-          <!-- DOMINIO -->
-          <div id="panel-dominio" class="d-none mt-3">
-            <div class="form-group col-md-6 px-0">
-              <label>Dominio*</label>
-              <input type="text" class="form-control">
-            </div>
-            <small class="text-muted">Al escribir la patente no debe haber espacios.</small>
-          </div>
-
-          <!-- CAPTCHA -->
-          <div class="mt-4">
-            <div class="g-recaptcha" data-sitekey="6LfcRGAlAAAAAJI0S2ABpxX_Wj56oioSE6y393OG"></div>
-          </div>
-        </div>
-
-        <!-- BOTON -->
-        <div class="text-right">
-          <button class="btn btn-primary btn-lg" type="submit">
-            Consultar
-          </button>
-        </div>
-
-      </form>
-
-      <!-- RESULTADOS (MISMO ARCHIVO) -->
-      <section class="mt-5 d-none" id="resultado">
-        <h2>Resultado de la consulta</h2>
-        <p>No se registran infracciones pendientes.</p>
-      </section>
-
+  <div class="d-flex mb-3">
+    <div class="custom-control custom-radio mr-4">
+      <input class="custom-control-input" type="radio" id="radioDni" name="tipo" checked>
+      <label class="custom-control-label" for="radioDni">Un documento</label>
     </div>
-
-    <!-- COLUMNA DERECHA (INFO) -->
-    <aside class="col-lg-4 d-none d-lg-block">
-      <div class="card p-3">
-        <h5>¿Qué es el scoring?</h5>
-        <p class="small">
-          Es el sistema de puntaje para conductores de la Ciudad.
-        </p>
-      </div>
-    </aside>
-
+    <div class="custom-control custom-radio">
+      <input class="custom-control-input" type="radio" id="radioDominio" name="tipo">
+      <label class="custom-control-label" for="radioDominio">Una patente</label>
+    </div>
   </div>
+
+  <!-- Documento -->
+  <div id="panelDocumento" class="row">
+    <div class="form-group col-lg-4">
+      <label>Tipo de documento*</label>
+      <select class="custom-select">
+        <option>DNI</option>
+        <option>CI</option>
+        <option>CUIT</option>
+        <option>LC</option>
+        <option>LE</option>
+        <option>PAS</option>
+      </select>
+    </div>
+    <div class="form-group col-lg-6">
+      <label>Número de documento*</label>
+      <input type="number" class="form-control">
+    </div>
+  </div>
+
+  <!-- Dominio -->
+  <div id="panelDominio" class="row d-none">
+    <div class="form-group col-lg-6">
+      <label>Dominio*</label>
+      <input type="text" class="form-control">
+      <small>Ingresá la patente sin espacios.</small>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <div class="g-recaptcha" data-sitekey="6LfcRGAlAAAAAJI0S2ABpxX_Wj56oioSE6y393OG"></div>
+  </div>
+</div>
+
+<div class="text-right mt-4">
+  <button class="btn btn-primary btn-lg px-5">Consultar</button>
+</div>
+
+</form>
+</section>
+</div>
+
+</article>
 </main>
 
-<!-- ================= FOOTER ================= -->
-<footer class="main-footer pie-final mt-5">
+<footer class="main-footer mt-5">
   <div class="container">
-    <p class="small">
-      Los contenidos de buenosaires.gob.ar están licenciados bajo Creative Commons.
-    </p>
+    <h4>Teléfonos útiles</h4>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="tel:102">102 - Niñez</a></li>
+      <li class="list-inline-item"><a href="tel:103">103 - Emergencias</a></li>
+    </ul>
   </div>
 </footer>
 
-<script src="https://www.google.com/recaptcha/api.js?hl=ES"></script>
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/js/obelisco.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
+
+<script>
+  const radioDni = document.getElementById("radioDni");
+  const radioDominio = document.getElementById("radioDominio");
+  const panelDoc = document.getElementById("panelDocumento");
+  const panelDom = document.getElementById("panelDominio");
+
+  radioDni.addEventListener("change", () => {
+    panelDoc.classList.remove("d-none");
+    panelDom.classList.add("d-none");
+  });
+
+  radioDominio.addEventListener("change", () => {
+    panelDom.classList.remove("d-none");
+    panelDoc.classList.add("d-none");
+  });
+</script>
 
 </body>
 </html>
