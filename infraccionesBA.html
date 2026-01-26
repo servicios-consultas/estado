@@ -18,42 +18,29 @@
 <body>
 
 <!-- HEADER -->
-<header class="bg-white border-bottom">
-  <nav class="navbar navbar-expand-lg navbar-light container">
-    
-    <!-- LOGO -->
-    <a class="navbar-brand" href="https://www.buenosaires.gob.ar/">
-      <img src="https://buenosaires.gob.ar/licenciasdeconducir/consulta-de-infracciones/assets/img/logoBA.svg" alt="Ciudad de Buenos Aires" style="height:40px">
-    </a>
-
-    <!-- BOTÓN MOBILE -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarBA">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- CONTENIDO -->
-    <div class="collapse navbar-collapse" id="navbarBA">
-      
-      <!-- LINKS -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="https://buenosaires.gob.ar">Inicio</a>
-        </li>
-      </ul>
-
-      <!-- BUSCADOR -->
-      <form class="form-inline d-none d-lg-flex">
-        <input class="form-control form-control-sm mr-2" type="search" placeholder="Buscar...">
-        <button class="btn btn-outline-secondary btn-sm" type="submit">Buscar</button>
-      </form>
-
-    </div>
-  </nav>
 </header>
 
-<!-- CONTENIDO -->
-<main class="container my-5">
+<!-- BREADCRUMB -->
+<nav aria-label="breadcrumb" class="bg-light">
+  <div class="container">
+    <ol class="breadcrumb mb-0 py-2">
+      <li class="breadcrumb-item">
+        <a href="https://buenosaires.gob.ar/inicio/">Buenos Aires</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="https://buenosaires.gob.ar/justicia-y-seguridad">Justicia y Seguridad</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="https://buenosaires.gob.ar/jefaturadegabinete/infracciones">Infracciones</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Consulta de infracciones
+      </li>
+    </ol>
+  </div>
+</nav>
 
+<main class="container my-5">
 <form onsubmit="event.preventDefault(); consultar();">
 
 <div class="card p-4 mb-4">
