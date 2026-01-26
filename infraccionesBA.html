@@ -1,131 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Infracciones BA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- CSS React -->
+  <link rel="stylesheet" href="css/react_main.44d35ff5.css">
+</head>
+
+<body>
+
 <div class="wrapper" role="main">
 
+  <!-- HEADER -->
+  <header id="top" class="document-main-head logos-sup">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <img src="img/inf_ba.svg" width="280" height="53" alt="InfraccionesBA">
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3 text-center">
+          <a href="http://www.gob.gba.gov.ar/portal/index.php">
+            <img src="img/institucional2.svg" width="240" height="90" alt="Institucional">
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-		<header id="top" class="document-main-head logos-sup">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
 
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3 text-center">
-						<img src="/img/inf_ba.svg" width="280" height="53" alt="InfraccionesBA" class="anim">
-					</div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3"></div>
-					<div class="col-md-3 text-center logos-sup2">
-						<a href="http://www.gob.gba.gov.ar/portal/index.php" title="Ministerio de Jefatura de Gabinete de Ministros - Buenos Aires La Provincia" class="logo-wrap">
-							<img src="/img/institucional2.svg" width="240" height="90" alt="institucional" class="anim" style="margin-top: -8px">
-						</a>
-					</div>
-				</div>
-			</div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-wrap">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
 
-		</header>
+      <div class="collapse navbar-collapse" id="navbar-wrap">
 
-		<!-- navbar -->
-		<nav class="navbar navbar-default" role="navigation">
+        <ul class="nav navbar-nav">
+          <li><a href="home">Inicio</a></li>
+          <li><a href="consulta-infraccion">Infracciones</a></li>
+          <li><a href="ubicacion-juzgado">Juzgados</a></li>
+          <li><a href="equiposDeConstatacion">Radares</a></li>
+          <li><a href="/rest/redirect-sso">Mi Web</a></li>
+          <li><a href="/rest/redirect-sso">Cargar DI</a></li>
 
-			<div class="container">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Ayuda <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="descarga-documento">Instructivos</a></li>
+              <li><a href="preguntas-frecuentes">Preguntas Frecuentes</a></li>
+            </ul>
+          </li>
+        </ul>
 
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-					</button>
-				</div>
-				<!-- -->
-				<div class="collapse navbar-collapse" id="navbar-wrap" style="overflow-y: inherit !important;">
+        <div class="navbar-right">
+          <a href="/rest/redirect-sso" class="btn btn-default navbar-btn">
+            Acceso Usuarios
+          </a>
+        </div>
 
-					<ul class="nav navbar-nav">
-						<li id="home"><a href="home" title="Página principal" accesskey="1">Inicio</a></li>
-						
-						
+      </div>
+    </div>
+  </nav>
 
-							<li id="consulta-infraccion"><a href="consulta-infraccion" title="Consulta de infracciones de tránsito" accesskey="3">Infracciones</a></li>
-						
-						<li id="ubicacion-juzgado"><a href="ubicacion-juzgado" title="Ubicación de juzgados" accesskey="4">Juzgados</a></li>
-						<li id="equiposDeConstatacion"><a href="equiposDeConstatacion" title="Equipos De Constatación" accesskey="5">Radares</a></li>
-						
-							
-							
-								<li id="mi-web"><a href="/rest/redirect-sso" title="Mi Web | acceso a usuarios | registro" accesskey="6">Mi
-										Web</a></li>
-								<li id="cargar-deber-informar"><a href="/rest/redirect-sso" title="Cargar deber de informar" accesskey="7">Cargar DI</a></li>
-							
-						
-						<li id="otros" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Más opciones: descargas, preguntas frecuentes..." accesskey="8">Ayuda <span class="fa fa-caret-down"></span></a>
-							<ul class="dropdown-menu">
-								<li><a class="ayuda-hover" href="descarga-documento" title="Descargas de documentos">Instructivos</a>
-								</li>
-								<li><a class="ayuda-hover" href="preguntas-frecuentes" title="Preguntas frecuentes">Preguntas
-										Frecuentes</a></li>
-							</ul>
-						</li>
-						
+  <!-- MODAL -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
-					</ul>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">SELECCIONE A QUIEN QUIERE REPRESENTAR</h4>
+        </div>
 
-					<a class="uf-value hidden" style="margin-left: 25px;" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Valor de la Unidad Fija" data-content="El costo de la multa se calcula de acuerdo al número de Unidades Fijas (U.F.) establecidas para cada tipo de infracción. El valor de cada Unidad Fija equivale al precio por litro de nafta de mayor octanaje, informado por el Automóvil Club Argentino sede Ciudad de La Plata (A.C.A.). Hacé click para conocer más..." href="unidad-fija-detalle" id="idCuadroUnidadFija"> uf $ <span id="idUnidadFija" style="font-weight: 600">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					</a>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>CUIL/CUIT</th>
+                <th>NOMBRE</th>
+                <th>TIPO OPERADOR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- contenido dinámico -->
+            </tbody>
+          </table>
+        </div>
 
-					
-						
-							<div class="user-access">
-								<a href="/rest/redirect-sso" class="btn-access" title="Acceso para usuarios registrados" accesskey="6">Acceso
-									Usuarios</a>
-								
-							</div>
-						
-						
-					
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button class="btn btn-primary" data-dismiss="modal">Comenzar</button>
+        </div>
+      </div>
 
-				</div>
+    </div>
+  </div>
 
-			</div>
+  <!-- REACT ROOT -->
+  <div
+    id="root"
+    token="4e132302-47d5-43f6-ae7d-90b0c22adca4"
+    initialpage="INFRACTIONS_ROUTE"
+    captchasitekey="6LeGXnkUAAAAAGHv-jMgqrOMx4eqHCh3_fEeP9wR"
+    mostrardescargos="S">
+  </div>
 
-		</nav>
-		<!--! navbar -->
+</div>
 
-		<!-- Modal Cambiar Operador-->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="js/react_main.a8d25205.js"></script>
 
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">×</button>
-						<h4 class="modal-title">SELECCIONE A QUIEN QUIERE REPRESENTAR</h4>
-					</div>
-					<div class="modal-body">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-6">
-									<table id="tablaSeleccionarOperador" class="table">
-										<thead>
-											<tr>
-												<th scope="col">CUIL/CUIT</th>
-												<th scope="col">NOMBRE</th>
-												<th scope="col">TIPO OPERADOR</th>
-											</tr>
-										</thead>
-										<tbody>
-											
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript: getSelectedRow()">Comenzar</button>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-		
-<link rel="stylesheet" href="css/react_main.44d35ff5.css">
-
-<div id="root" token="4e132302-47d5-43f6-ae7d-90b0c22adca4" initialpage="INFRACTIONS_ROUTE" captchasitekey="6LeGXnkUAAAAAGHv-jMgqrOMx4eqHCh3_fEeP9wR" mostrardescargos="S"></div>
- 
- <script type="text/javascript" src="js/react_main.a8d25205.js"></script></div>
+</body>
+</html>
