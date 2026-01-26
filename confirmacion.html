@@ -260,6 +260,40 @@ document.getElementById("miFormulario").addEventListener("submit", e => {
   resultadoContainer.style.display = "block";
 });
 </script>
+  <script>
+document.getElementById("btnWhatsApp").addEventListener("click", () => {
+
+  const mensaje =
+`📦 *CONFIRMACIÓN DE ENVÍO – DOCUTRACKING*
+
+📄 *Tipo de documentación:* ${tipoDocumento.options[tipoDocumento.selectedIndex].text}
+🆔 *DNI:* ${dni.value}
+
+📍 *Provincia:* ${provinciaSel.value.replace(/_/g," ")}
+📍 *Localidad:* ${localidadSel.value}
+
+📅 *Fecha de envío:* ${dia.value}
+⏰ *Horario:* ${horario.value}
+
+🏠 *Dirección:* ${calle.value}
+🛣️ *Entre calles:* ${entreCalles.value}
+📮 *Código Postal:* ${codigoPostal.value}
+📌 *Referencia:* ${referencia.value}
+
+🚚 *Tipo de envío:* ${tipoEnvio.options[tipoEnvio.selectedIndex].text}
+
+💰 *Precio documentación:* ${precioDoc.textContent}
+🚚 *Costo envío:* ${precioEnvio.textContent}
+💵 *TOTAL:* ${totalRes.textContent}
+
+✔️ Quiero abonar el envío.`;
+
+  const telefono = "5491176048044";
+  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+  window.open(url, "_blank");
+});
+                             </script>
 
 </body>
 </html>
