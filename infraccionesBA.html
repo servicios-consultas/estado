@@ -7,194 +7,220 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+  <style>
+    body { background-color: #f5f5f5; }
+    .card-header button { all: unset; width: 100%; cursor: pointer; }
+    .infraccion-header { display:flex; align-items:flex-start; }
+    .infraccion-header input { margin-top:6px; }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER / NAVBAR -->
+<!-- HEADER -->
 <header class="bg-white border-bottom">
   <div class="container d-flex align-items-center py-2">
     <a class="navbar-brand" href="https://www.buenosaires.gob.ar/">
-      <img class="header-logo" src="./assets/img/logoBA.svg" alt="Ciudad de Buenos Aires">
+      <img src="./assets/img/logoBA.svg" height="40" alt="Buenos Aires">
     </a>
-
-    <div class="navbar-search ml-auto d-none d-lg-block">
-      <form class="form-search form-search-sm">
-        <div class="form-group mb-0">
-          <input type="search" class="form-control form-control-sm" placeholder="Buscar...">
-        </div>
-      </form>
-    </div>
-
-    <button class="navbar-toggler ml-2" data-toggle="collapse" data-target="#navbarSupportedContent">
-      Menú
-    </button>
-  </div>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="nav nav-pills container pb-2">
-      <li class="nav-item">
-        <a href="https://buenosaires.gob.ar" class="nav-link active">Inicio</a>
-      </li>
-    </ul>
   </div>
 </header>
 
-<!-- CONTENIDO PRINCIPAL -->
+<!-- CONTENIDO -->
 <main class="container my-5">
 
-  <form id="formConsulta">
+<!-- FORMULARIO -->
+<div class="card p-4 mb-4">
+  <h3>Quiero datos sobre</h3>
 
-    <div class="card p-4">
-      <h3 class="mb-3">Quiero datos sobre</h3>
-
-      <!-- RADIOS -->
-      <div class="d-flex">
-        <div class="custom-control custom-radio mr-4">
-          <input class="custom-control-input" type="radio" name="tipo_consulta" id="radioDominio" value="Dominio">
-          <label class="custom-control-label" for="radioDominio">
-            Una patente
-          </label>
-        </div>
-
-        <div class="custom-control custom-radio">
-          <input class="custom-control-input" type="radio" name="tipo_consulta" id="radioDocumento" value="Documento" checked>
-          <label class="custom-control-label" for="radioDocumento">
-            Un documento
-          </label>
-        </div>
-      </div>
-
-      <!-- PANEL DOCUMENTO -->
-      <div class="row mt-3" id="panel-documento">
-        <div class="form-group col-12 col-lg-4">
-          <label>Tipo de documento*</label>
-          <select class="custom-select" name="tipo_doc">
-            <option>CI</option>
-            <option>CUIT</option>
-            <option selected>DNI</option>
-            <option>EXT</option>
-            <option>LC</option>
-            <option>LE</option>
-            <option>PAS</option>
-          </select>
-        </div>
-
-        <div class="form-group col-12 col-lg-6">
-          <label>Número de documento*</label>
-          <input type="number" class="form-control" name="doc">
-        </div>
-      </div>
-
-      <!-- PANEL DOMINIO -->
-      <div class="row mt-3 d-none" id="panel-dominio">
-        <div class="form-group col-12 col-lg-6">
-          <label>Dominio*</label>
-          <input type="text" class="form-control" name="dominio">
-        </div>
-      </div>
+  <div class="d-flex mt-3">
+    <div class="custom-control custom-radio mr-4">
+      <input class="custom-control-input" type="radio" name="tipo" id="rDominio" checked>
+      <label class="custom-control-label" for="rDominio">Una patente</label>
     </div>
 
-    <div class="text-right mt-4">
-      <button type="submit" class="btn btn-primary btn-lg">
-        Consultar
-      </button>
+    <div class="custom-control custom-radio">
+      <input class="custom-control-input" type="radio" name="tipo" id="rDni">
+      <label class="custom-control-label" for="rDni">Un documento</label>
     </div>
-
-  </form>
-
-  <!-- RESULTADO -->
-  <div class="card p-4 mt-4 d-none" id="resultado">
-    <h4>Resultado de la consulta</h4>
-    <div id="resultadoContenido"></div>
   </div>
+
+  <div class="row mt-3" id="panelDominio">
+    <div class="form-group col-lg-6">
+      <label>Dominio*</label>
+      <input type="text" class="form-control" id="inputDominio">
+    </div>
+  </div>
+
+  <div class="row mt-3 d-none" id="panelDni">
+    <div class="form-group col-lg-4">
+      <label>Tipo de documento</label>
+      <select class="custom-select">
+        <option selected>DNI</option>
+      </select>
+    </div>
+    <div class="form-group col-lg-6">
+      <label>Número de documento*</label>
+      <input type="number" class="form-control" id="inputDni">
+    </div>
+  </div>
+</div>
+
+<div class="text-right mb-5">
+  <button class="btn btn-primary btn-lg" onclick="consultar()">Consultar</button>
+</div>
+
+<!-- RESULTADOS -->
+<div id="resultados" class="d-none">
+
+  <div class="card p-4 mb-4">
+    <h3>Datos ingresados</h3>
+    <small id="tipoConsulta"></small>
+    <h6 id="valorConsulta"></h6>
+  </div>
+
+  <h2>Tus infracciones</h2>
+  <h6 id="totalInfracciones"></h6>
+
+  <div id="listaInfracciones"></div>
+
+  <!-- RESUMEN -->
+  <div class="card p-3 mt-3">
+    <span id="totalActas">(0 actas seleccionadas)</span>
+    <h4 id="totalMonto">$0</h4>
+    <span>Puntos a descontar: <strong id="totalPD">0</strong></span><br>
+    <span>Puntos a reasignar: <strong id="totalPR">0</strong></span>
+  </div>
+
+  <div class="text-right mt-3">
+    <button id="btnPagar" class="btn btn-primary btn-lg" disabled>
+      Pagar seleccionadas
+    </button>
+  </div>
+
+</div>
 
 </main>
 
 <!-- FOOTER -->
-<footer class="main-footer pie-final bg-light pt-5">
-  <div class="container">
-    <section class="text-center">
-      <small>
-        Los contenidos de buenosaires.gob.ar están licenciados bajo Creative Commons.
-      </small>
-    </section>
+<footer class="bg-light py-4 mt-5">
+  <div class="container text-center">
+    <small>Buenos Aires Ciudad</small>
   </div>
 </footer>
 
-<!-- SCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-/* =========================
-   BASE DE DATOS SIMULADA
-   ========================= */
+/* =======================
+   DATOS EDITABLES
+======================= */
 
-const personas = [
+const infracciones = [
   {
-    dni: "30123456",
-    dominios: ["AA123BB", "AC456CD"],
-    tieneMultas: false,
-    libreDeudaURL: "https://TU_URL_DE_LIBRE_DEUDA_AQUI"
+    acta: "G02829771",
+    tipo: "Forzar barrera / evadir pago de peaje",
+    fecha: "08/08/2024 14:22",
+    lugar: "AU Dellepiane Km 0.5",
+    puntosD: 0,
+    puntosR: 0,
+    monto: 0,
+    foto: "https://tu-dominio.com/G02829771.jpg"
   },
   {
-    dni: "28999888",
-    dominios: ["AB111AA"],
-    tieneMultas: true,
-    libreDeudaURL: "https://TU_URL_DE_LIBRE_DEUDA_AQUI"
+    acta: "A01458963",
+    tipo: "Exceso de velocidad",
+    fecha: "15/09/2024 09:10",
+    lugar: "Av. Gral Paz Km 12",
+    puntosD: 5,
+    puntosR: 0,
+    monto: 25000,
+    foto: "https://tu-dominio.com/A01458963.jpg"
   }
 ];
 
-/* =========================
-   CAMBIO DE PANEL
-   ========================= */
-document.getElementById("radioDominio").addEventListener("change", () => {
-  document.getElementById("panel-dominio").classList.remove("d-none");
-  document.getElementById("panel-documento").classList.add("d-none");
-});
-
-document.getElementById("radioDocumento").addEventListener("change", () => {
-  document.getElementById("panel-documento").classList.remove("d-none");
-  document.getElementById("panel-dominio").classList.add("d-none");
-});
-
-/* =========================
+/* =======================
    CONSULTA
-   ========================= */
-document.getElementById("formConsulta").addEventListener("submit", function(e) {
-  e.preventDefault();
+======================= */
 
-  const tipo = document.querySelector('input[name="tipo_consulta"]:checked').value;
-  let personaEncontrada = null;
+function consultar() {
+  document.getElementById("resultados").classList.remove("d-none");
 
-  if (tipo === "Documento") {
-    const dni = document.querySelector('input[name="doc"]').value;
-    personaEncontrada = personas.find(p => p.dni === dni);
-  } else {
-    const dominio = document.querySelector('input[name="dominio"]').value.toUpperCase();
-    personaEncontrada = personas.find(p => p.dominios.includes(dominio));
-  }
+  const tipo = document.getElementById("rDominio").checked ? "Patente" : "DNI";
+  const valor = tipo === "Patente"
+    ? document.getElementById("inputDominio").value
+    : document.getElementById("inputDni").value;
 
-  const resultado = document.getElementById("resultado");
-  const contenido = document.getElementById("resultadoContenido");
+  document.getElementById("tipoConsulta").innerText = tipo;
+  document.getElementById("valorConsulta").innerText = valor;
 
-  if (!personaEncontrada) {
-    contenido.innerHTML = "<p>No se encontraron datos para la consulta realizada.</p>";
-  } else {
-    contenido.innerHTML = `
-      <p><strong>DNI:</strong> ${personaEncontrada.dni}</p>
-      <p><strong>Dominios asociados:</strong> ${personaEncontrada.dominios.join(", ")}</p>
-      <p><strong>Estado de multas:</strong> ${personaEncontrada.tieneMultas ? "Posee infracciones" : "No registra infracciones"}</p>
-      <a href="${personaEncontrada.libreDeudaURL}" target="_blank" class="btn btn-outline-primary mt-2">
-        Ver / Descargar libre deuda
-      </a>
+  renderInfracciones();
+}
+
+function renderInfracciones() {
+  const cont = document.getElementById("listaInfracciones");
+  cont.innerHTML = "";
+
+  document.getElementById("totalInfracciones").innerText =
+    `Infracciones totales: ${infracciones.length}`;
+
+  infracciones.forEach((i, idx) => {
+    cont.innerHTML += `
+      <div class="card mb-3">
+        <div class="card-header infraccion-header">
+          <input type="checkbox" data-i="${idx}" onchange="calcular()">
+          <div class="ml-3">
+            <strong>Acta ${i.acta}</strong>
+            <div>${i.tipo}</div>
+            <small>${i.fecha}</small>
+          </div>
+        </div>
+        <div class="card-body">
+          <p><strong>Lugar:</strong> ${i.lugar}</p>
+          <p><strong>Puntos a descontar:</strong> ${i.puntosD}</p>
+          <p><strong>Puntos a reasignar:</strong> ${i.puntosR}</p>
+          <h4>$${i.monto.toLocaleString("es-AR")}</h4>
+          <a href="${i.foto}" target="_blank" class="btn btn-secondary btn-sm">
+            Descargar foto
+          </a>
+        </div>
+      </div>
     `;
-  }
+  });
+}
 
-  resultado.classList.remove("d-none");
-});
+function calcular() {
+  let total = 0, pd = 0, pr = 0, c = 0;
+
+  document.querySelectorAll("input[type=checkbox]").forEach(chk => {
+    if (chk.checked) {
+      const i = infracciones[chk.dataset.i];
+      total += i.monto;
+      pd += i.puntosD;
+      pr += i.puntosR;
+      c++;
+    }
+  });
+
+  document.getElementById("totalActas").innerText = `(${c} actas seleccionadas)`;
+  document.getElementById("totalMonto").innerText = `$${total.toLocaleString("es-AR")}`;
+  document.getElementById("totalPD").innerText = pd;
+  document.getElementById("totalPR").innerText = pr;
+  document.getElementById("btnPagar").disabled = c === 0;
+}
+
+/* TOGGLE FORM */
+document.getElementById("rDominio").onclick = () => {
+  panelDominio.classList.remove("d-none");
+  panelDni.classList.add("d-none");
+};
+document.getElementById("rDni").onclick = () => {
+  panelDni.classList.remove("d-none");
+  panelDominio.classList.add("d-none");
+};
 </script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
