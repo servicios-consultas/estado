@@ -18,44 +18,53 @@
 <body>
 
 <!-- HEADER -->
-</header>
-<header class="bg-light pt-3 pb-5 mb-5">
-          <div class="container pt-1">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="https://buenosaires.gob.ar/inicio/">Buenos Aires</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="https://buenosaires.gob.ar/justicia-y-seguridad">Justicia y Seguridad</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="https://buenosaires.gob.ar/jefaturadegabinete/infracciones">Infracciones</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="https://buenosaires.gob.ar/licenciasdeconducir/consulta-de-infracciones/?actas=transito">Consulta de infracciones</a>
-                </li>
-              </ol>
-            </nav>
-            <div class="row">
-              <div class="col-12 col-lg-8">
-                <div class="mt-2 pt-1">
-                  <h1 class="mb-3">Consulta de infracciones de tránsito y scoring</h1>
-                  <p class="lead">Accedé a la información de tránsito pendiente de pago y tu puntaje, en la ciudad de Buenos Aires.</p>
-                </div>
-                <div class="d-flex">
-                  <div>
-                    <p class="m-0">Modalidad:</p>
-                  </div>
-                  <div class="d-flex align-items-center">
-                    <span class="badge badge-secondary ml-2">Presencial</span>
-                    <span class="badge badge-secondary">en línea</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+<body>
+
+<!-- NAVBAR SUPERIOR -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    
+    <!-- 👇 TU BLOQUE VA ACÁ 👇 -->
+    <div class="container">
+      <a class="navbar-brand" href="https://www.buenosaires.gob.ar/">
+        <img class="header-logo" src="./assets/img/logoBA.svg" alt="Ciudad de buenos aires">
+      </a>
+      <div class="navbar-search d-responsive ml-auto">
+        <form class="form-search form-search-sm">
+          <div class="form-group">
+            <input type="search" class="form-control form-control-sm input-search" name="header-search" aria-label="Ingrese su búsqueda" placeholder="Buscar...">
+            <button class="reset" type="reset"></button>
           </div>
-        </header>
+        </form>
+      </div>
+      <button class="navbar-toggler collapsed ml-2" data-toggle="collapse" data-target="#navbarSupportedContent">
+        Menú
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="list-group-content d-responsive ml-2">
+        <a href="#" aria-label="Cerrar sesión" class="list-group-item list-group-item-logout logout-sm"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="https://buenosaires.gob.ar" class="nav-link active"><span>Inicio</span></a>
+          </li>
+          <li class="nav-item d-responsive">
+            <div class="navbar-search">
+              <form class="form-search form-search-sm">
+                <div class="form-group">
+                  <input type="search" class="form-control form-control-sm input-search" placeholder="Buscar...">
+                  <button class="reset" type="reset"></button>
+                </div>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+</header>
 <div class="card p-4">
               <h3>Quiero datos sobre</h3>
               <div class="d-flex">
