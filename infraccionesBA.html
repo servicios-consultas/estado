@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Consulta de Infracciones | Buenos Aires</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consulta de Infracciones | Buenos Aires</title>
 
-<!-- Fonts & Bootstrap -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --azul-ba:#0072bb;
-  --celeste-ba:#f2f9fc;
-  --gris:#6c757d;
-}
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-body{
-  font-family:'Montserrat',sans-serif;
-  background-color:var(--celeste-ba);
-}
+  <style>
+    :root{
+      --azul-ba:#0072bb;
+      --celeste:#f2f9fc;
+      --gris:#6c757d;
+    }
 
-/* Header */
-header{
-  background:#fff;
-  border-bottom:3px solid var(--azul-ba);
-}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background-color:var(--celeste);
+      margin:0;
+    }
 
-.header-logo{
-  height:48px;
-}
+    /* HEADER */
+    header{
+      background:#fff;
+      border-bottom:3px solid var(--azul-ba);
+    }
 
-/* Card */
-.card-consulta{
-  border:none;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
+    .header-logo{
+      height:48px;
+    }
 
-/* Botón */
-.btn-ba{
-  background:var(--azul-ba);
-  color:#fff;
-  font-weight:600;
-}
-.btn-ba:hover{
-  background:#005a96;
-}
+    /* CARD */
+    .card-consulta{
+      border:none;
+      border-radius:14px;
+      box-shadow:0 10px 25px rgba(0,0,0,.08);
+    }
 
-/* Resultado */
-.resultado{
-  display:none;
-  margin-top:20px;
-}
-.resultado.ok{
-  display:block;
-  background:#e8f6ff;
-  border-left:5px solid var(--azul-ba);
-  padding:15px;
-  border-radius:8px;
-}
-</style>
+    /* BOTÓN */
+    .btn-ba{
+      background:var(--azul-ba);
+      color:#fff;
+      font-weight:600;
+    }
+    .btn-ba:hover{
+      background:#005a96;
+    }
+
+    /* RESULTADO */
+    .resultado{
+      display:none;
+      margin-top:20px;
+      background:#e9f6ff;
+      border-left:5px solid var(--azul-ba);
+      padding:15px;
+      border-radius:8px;
+    }
+  </style>
 </head>
 
 <body>
@@ -68,25 +68,35 @@ header{
 <!-- HEADER -->
 <header class="py-3">
   <div class="container d-flex align-items-center">
-    <a href="https://www.buenosaires.gob.ar">
-      <img src="./assets/img/logoBA.svg" alt="Ciudad de Buenos Aires" class="header-logo">
+    <a href="https://www.buenosaires.gob.ar" target="_blank">
+      <img src="./assets/img/logoBA.svg" alt="Gobierno de la Ciudad" class="header-logo">
     </a>
-    <span class="ms-3 fw-semibold text-secondary">Consulta de infracciones</span>
+    <span class="ms-3 fw-semibold text-secondary">
+      Consulta de infracciones
+    </span>
   </div>
 </header>
 
 <!-- CONTENIDO -->
 <main class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-8">
 
       <div class="card card-consulta p-4">
-        <h4 class="fw-bold mb-3 text-center">Consultar infracciones</h4>
+        <h4 class="fw-bold text-center mb-3">
+          Consultar infracciones
+        </h4>
 
         <form id="formConsulta">
           <div class="mb-3">
             <label class="form-label">DNI o Dominio</label>
-            <input type="text" id="dato" class="form-control" placeholder="Ej: 30123456 o AA123BB" required>
+            <input
+              type="text"
+              id="dato"
+              class="form-control"
+              placeholder="Ej: 30123456 o AA123BB"
+              required
+            >
           </div>
 
           <div class="d-grid">
@@ -97,10 +107,10 @@ header{
         </form>
 
         <!-- RESULTADO -->
-        <div id="resultado" class="resultado ok">
-          <h6 class="fw-bold mb-1">Estado de la consulta</h6>
+        <div id="resultado" class="resultado">
+          <h6 class="fw-bold mb-1">Resultado de la consulta</h6>
           <p class="mb-0">
-            ✔ El trámite fue encontrado y se encuentra <strong>en proceso</strong>.
+            ✔ Trámite encontrado. Estado: <strong>En proceso</strong>
           </p>
         </div>
 
@@ -112,23 +122,22 @@ header{
 
 <!-- JS -->
 <script>
-document.getElementById("formConsulta").addEventListener("submit", function(e){
-  e.preventDefault();
+  document.getElementById("formConsulta").addEventListener("submit", function(e){
+    e.preventDefault();
 
-  const valor = document.getElementById("dato").value.trim();
-  const resultado = document.getElementById("resultado");
+    const valor = document.getElementById("dato").value.trim();
+    const resultado = document.getElementById("resultado");
 
-  // Validación simple (DNI o patente)
-  const dniValido = /^[0-9]{7,8}$/.test(valor);
-  const dominioValido = /^[A-Z]{2}[0-9]{3}[A-Z]{2}$/i.test(valor);
+    const dni = /^[0-9]{7,8}$/;
+    const dominio = /^[A-Z]{2}[0-9]{3}[A-Z]{2}$/i;
 
-  if(dniValido || dominioValido){
-    resultado.style.display = "block";
-  }else{
-    resultado.style.display = "none";
-    alert("Ingresá un DNI o dominio válido");
-  }
-});
+    if(dni.test(valor) || dominio.test(valor)){
+      resultado.style.display = "block";
+    }else{
+      resultado.style.display = "none";
+      alert("Ingresá un DNI o dominio válido");
+    }
+  });
 </script>
 
 </body>
