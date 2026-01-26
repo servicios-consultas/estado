@@ -12,6 +12,36 @@
     body { background-color: #f5f5f5; }
     .infraccion-header { display:flex; align-items:flex-start; }
     .infraccion-header input { margin-top:6px; }
+    <style>
+.search-ba {
+  position: relative;
+}
+
+.search-ba .input-search {
+  padding-right: 36px;
+}
+
+.search-ba .btn-search {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.search-ba .btn-search::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23666' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
   </style>
 </head>
 
