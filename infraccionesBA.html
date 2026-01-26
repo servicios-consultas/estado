@@ -2,279 +2,213 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Consulta de Infracciones | Buenos Aires</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-
-  <style>
-    body { background-color: #f5f5f5; }
-    .card-header button { all: unset; width: 100%; cursor: pointer; }
-    .infraccion-header { display:flex; align-items:flex-start; }
-    .infraccion-header input { margin-top:6px; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de infracciones - Buenos Aires</title>
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="./assets/js/jquery.min.js"></script>
+  <script src="./assets/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
 
-<!-- HEADER / NAVBAR -->
-<header class="bg-white border-bottom">
-  <div class="container d-flex align-items-center py-2">
-    <a class="navbar-brand" href="https://www.buenosaires.gob.ar/">
-      <img class="header-logo" src="https://buenosaires.gob.ar/licenciasdeconducir/consulta-de-infracciones/assets/img/logoBA.svg" alt="Ciudad de Buenos Aires">
-    </a>
-  </div>
-</header>
-
-<!-- CONTENIDO PRINCIPAL -->
-<main class="container my-5">
-
-  <!-- FORMULARIO -->
-  <div class="card p-4 mb-4">
-    <h3 class="mb-3">Quiero datos sobre</h3>
-
-    <!-- RADIOS -->
-    <div class="d-flex">
-      <div class="custom-control custom-radio mr-4">
-        <input class="custom-control-input" type="radio" name="tipo_consulta" id="radioDominio" checked>
-        <label class="custom-control-label" for="radioDominio">Una patente</label>
-      </div>
-
-      <div class="custom-control custom-radio">
-        <input class="custom-control-input" type="radio" name="tipo_consulta" id="radioDocumento">
-        <label class="custom-control-label" for="radioDocumento">Un documento</label>
-      </div>
-    </div>
-
-    <!-- PANEL DOMINIO -->
-    <div class="row mt-3" id="panel-dominio">
-      <div class="form-group col-12 col-lg-6">
-        <label>Dominio*</label>
-        <input type="text" class="form-control" id="inputDominio">
-      </div>
-      <small class="col-12">Ingresá la patente sin espacios.</small>
-    </div>
-
-    <!-- PANEL DOCUMENTO -->
-    <div class="row mt-3 d-none" id="panel-documento">
-      <div class="form-group col-12 col-lg-4">
-        <label>Tipo de documento*</label>
-        <select class="custom-select" name="tipo_doc">
-          <option>CI</option>
-          <option>CUIT</option>
-          <option selected>DNI</option>
-          <option>EXT</option>
-          <option>LC</option>
-          <option>LE</option>
-          <option>PAS</option>
-        </select>
-      </div>
-
-      <div class="form-group col-12 col-lg-6">
-        <label>Número de documento*</label>
-        <input type="number" class="form-control" id="inputDni">
-      </div>
-
-      <small class="col-12">
-        Si tu DNI es menor a 10.000.000 utilizá LE o LC.
-        <a href="https://buenosaires.gob.ar/terminos-y-condiciones-consulta-de-infracciones">
-          Ver términos y condiciones
-        </a>
-      </small>
-    </div>
-
-    <div class="text-right mt-4">
-      <button type="button" class="btn btn-primary btn-lg" onclick="consultar()">Consultar</button>
-    </div>
-  </div>
-
-  <!-- RESULTADOS -->
-  <div id="resultados" class="d-none">
-
-    <div class="card p-4 mb-4">
-      <h3>Datos ingresados</h3>
-      <small id="tipoConsulta"></small>
-      <h6 id="valorConsulta"></h6>
-    </div>
-
-    <h2>Tus infracciones</h2>
-    <h6 id="totalInfracciones"></h6>
-
-    <div id="listaInfracciones"></div>
-
-    <!-- RESUMEN -->
-    <div class="card p-3 mt-3">
-      <span id="totalActas">(0 actas seleccionadas)</span>
-      <h4 id="totalMonto">$0</h4>
-      <span>Puntos a descontar: <strong id="totalPD">0</strong></span><br>
-      <span>Puntos a reasignar: <strong id="totalPR">0</strong></span>
-    </div>
-
-    <div class="text-right mt-3">
-      <button id="btnPagar" class="btn btn-primary btn-lg" disabled>
-        Pagar seleccionadas
-      </button>
-    </div>
-
-  </div>
-
-</main>
-
-<!-- FOOTER -->
-<footer class="main-footer pie-final bg-light pt-5">
+  <!-- NAVBAR -->
   <div class="container">
-    <section>
-      <h4>Teléfonos útiles</h4>
-      <ul class="list-inline">
-        <li class="list-inline-item"><a href="tel:102">102 - Niñez</a></li>
-        <li class="list-inline-item"><a href="tel:103">103 - Emergencias</a></li>
-        <li class="list-inline-item"><a href="tel:107">107 - SAME</a></li>
-        <li class="list-inline-item"><a href="tel:911">911 - Policía</a></li>
-        <li class="list-inline-item"><a href="tel:144">144 - Violencia de género</a></li>
-        <li class="list-inline-item"><a href="tel:147">147 - Atención ciudadana</a></li>
+    <a class="navbar-brand" href="https://www.buenosaires.gob.ar/">
+      <img class="header-logo" src="./assets/img/logoBA.svg" alt="Ciudad de buenos aires">
+    </a>
+    <div class="navbar-search d-responsive ml-auto">
+      <form class="form-search form-search-sm">
+        <div class="form-group">
+          <input type="search" class="form-control form-control-sm input-search" name="header-search" aria-label="Ingrese su búsqueda" placeholder="Buscar...">
+          <button class="reset" type="reset"></button>
+        </div>
+      </form>
+    </div>
+    <button class="navbar-toggler collapsed ml-2" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+      Menú
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="list-group-content d-responsive ml-2">
+      <a href="#" aria-label="Cerrar sesión" class="list-group-item list-group-item-logout logout-sm">&nbsp;</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a href="https://buenosaires.gob.ar" class="nav-link active"><span>Inicio</span></a>
+        </li>
+        <li class="nav-item d-responsive">
+          <div class="navbar-search">
+            <form class="form-search form-search-sm">
+              <div class="form-group">
+                <input type="search" class="form-control form-control-sm input-search" id="buscador-texto" name="header-search" aria-label="Ingrese su búsqueda" placeholder="Buscar...">
+                <button class="reset" type="reset"></button>
+              </div>
+            </form>
+          </div>
+        </li>
       </ul>
-    </section>
-
-    <hr>
-
-    <section class="text-center">
-      <small>
-        Los contenidos de buenosaires.gob.ar están licenciados bajo Creative Commons.
-      </small>
-    </section>
+    </div>
   </div>
-</footer>
 
-<!-- FUNCIONALIDAD BÚSQUEDA / INFRACCIONES -->
-<script>
-/* ============ BASE DE DATOS SIMULADA ============ */
-const personasDB = [
-  {
-    dni: "30123456",
-    dominios: ["HFD310","AA123BB"],
-    infracciones: [
-      {
-        acta: "G02829771",
-        tipo: "Forzar barrera / evadir pago de peaje",
-        fecha: "08/08/2024 14:22",
-        lugar: "AU Dellepiane Km 0.5",
-        puntosD: 0,
-        puntosR: 0,
-        monto: 0,
-        foto: "https://tu-dominio.com/G02829771.jpg"
-      },
-      {
-        acta: "A01458963",
-        tipo: "Exceso de velocidad",
-        fecha: "15/09/2024 09:10",
-        lugar: "Av. Gral Paz Km 12",
-        puntosD: 5,
-        puntosR: 0,
-        monto: 25000,
-        foto: "https://tu-dominio.com/A01458963.jpg"
-      }
-    ]
-  }
-];
-
-/* ============ VARIABLES GLOBALES ============ */
-let infraccionesActuales = [];
-
-/* ============ FUNCIONES ============ */
-function consultar() {
-  const esDominio = document.getElementById("radioDominio").checked;
-  const dominio = document.getElementById("inputDominio").value.trim().toUpperCase();
-  const dni = document.getElementById("inputDni").value.trim();
-
-  if (esDominio && dominio === "") { alert("Ingresá un dominio"); return; }
-  if (!esDominio && dni === "") { alert("Ingresá un DNI"); return; }
-
-  const persona = personasDB.find(p =>
-    esDominio ? p.dominios.includes(dominio) : p.dni === dni
-  );
-
-  if (!persona) {
-    alert("No se encontraron infracciones");
-    return;
-  }
-
-  infraccionesActuales = persona.infracciones;
-
-  document.getElementById("resultados").classList.remove("d-none");
-  document.getElementById("tipoConsulta").innerText = esDominio ? "Patente" : "DNI";
-  document.getElementById("valorConsulta").innerText = esDominio ? dominio : dni;
-
-  renderInfracciones();
-}
-
-function renderInfracciones() {
-  const cont = document.getElementById("listaInfracciones");
-  cont.innerHTML = "";
-  document.getElementById("totalInfracciones").innerText = `Infracciones totales: ${infraccionesActuales.length}`;
-
-  infraccionesActuales.forEach((i, idx) => {
-    cont.innerHTML += `
-      <div class="card mb-3">
-        <div class="card-header infraccion-header">
-          <input type="checkbox" data-i="${idx}" onchange="calcular()">
-          <div class="ml-3">
-            <strong>Acta ${i.acta}</strong>
-            <div>${i.tipo}</div>
-            <small>${i.fecha}</small>
+  <!-- HEADER -->
+  <header class="bg-light pt-3 pb-5 mb-5">
+    <div class="container pt-1">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="https://buenosaires.gob.ar/inicio/">Buenos Aires</a></li>
+          <li class="breadcrumb-item"><a href="https://buenosaires.gob.ar/justicia-y-seguridad">Justicia y Seguridad</a></li>
+          <li class="breadcrumb-item"><a href="https://buenosaires.gob.ar/jefaturadegabinete/infracciones">Infracciones</a></li>
+          <li class="breadcrumb-item"><a href="https://buenosaires.gob.ar/licenciasdeconducir/consulta-de-infracciones/?actas=transito">Consulta de infracciones</a></li>
+        </ol>
+      </nav>
+      <div class="row">
+        <div class="col-12 col-lg-8">
+          <div class="mt-2 pt-1">
+            <h1 class="mb-3">Consulta de infracciones de tránsito y scoring</h1>
+            <p class="lead">Accedé a la información de tránsito pendiente de pago y tu puntaje, en la ciudad de Buenos Aires.</p>
+          </div>
+          <div class="d-flex">
+            <div><p class="m-0">Modalidad:</p></div>
+            <div class="d-flex align-items-center">
+              <span class="badge badge-secondary ml-2">Presencial</span>
+              <span class="badge badge-secondary">en línea</span>
+            </div>
           </div>
         </div>
-        <div class="card-body">
-          <p><strong>Lugar:</strong> ${i.lugar}</p>
-          <p><strong>Puntos a descontar:</strong> ${i.puntosD}</p>
-          <p><strong>Puntos a reasignar:</strong> ${i.puntosR}</p>
-          <h4>$${i.monto.toLocaleString("es-AR")}</h4>
-          <a href="${i.foto}" target="_blank" class="btn btn-secondary btn-sm">Descargar foto</a>
-        </div>
       </div>
-    `;
-  });
-  calcular();
-}
+    </div>
+  </header>
 
-function calcular() {
-  let total = 0, pd = 0, pr = 0, c = 0;
-  document.querySelectorAll("#listaInfracciones input[type=checkbox]").forEach(chk => {
-    if (chk.checked) {
-      const i = infraccionesActuales[chk.dataset.i];
-      total += i.monto;
-      pd += i.puntosD;
-      pr += i.puntosR;
-      c++;
-    }
-  });
+  <!-- FORMULARIO -->
+  <div class="container">
+    <div class="col-12 col-lg-8">
+      <!-- inicio: Alerta -->
+      <div class="alert alert-info" role="alert">
+        <p>
+          Recordá que podés tener
+          <a href="https://buenosaires.gob.ar/licenciasdeconducir/consulta-de-infracciones/?actas=varios">actas de varios</a> que pueden impedirte realizar algunos trámites.
+        </p>
+      </div>
+      <div class="alert alert-danger d-none" role="alert"></div>
+      <!-- fin: Alerta -->
 
-  document.getElementById("totalActas").innerText = `(${c} actas seleccionadas)`;
-  document.getElementById("totalMonto").innerText = `$${total.toLocaleString("es-AR")}`;
-  document.getElementById("totalPD").innerText = pd;
-  document.getElementById("totalPR").innerText = pr;
-  document.getElementById("btnPagar").disabled = c === 0;
-}
+      <div class="pt-4 mb-5">
+        <form id="infracciones-form" method="POST" action="index.php">
+          <div class="card p-4">
+            <h3>Quiero datos sobre</h3>
+            <div class="d-flex">
+              <div class="custom-control custom-radio" id="radioDom">
+                <input class="custom-control-input" type="radio" name="tipo_consulta" value="Dominio" id="edit-tipo-consulta-dominio">
+                <label class="custom-control-label" for="edit-tipo-consulta-dominio">Una patente</label>
+              </div>
+              <div class="custom-control custom-radio" id="radioDoc">
+                <input class="custom-control-input" type="radio" name="tipo_consulta" id="edit-tipo-consulta-dni" value="Documento" checked>
+                <label class="custom-control-label" for="edit-tipo-consulta-dni">Un documento</label>
+              </div>
+            </div>
 
-/* ============ TOGGLE DNI / DOMINIO ============ */
-const panelDominio = document.getElementById("panel-dominio");
-const panelDocumento = document.getElementById("panel-documento");
+            <div class="d-flex mt-2 flex-wrap" id="panel-documento">
+              <div class="form-group col-12 col-lg-4 px-1">
+                <label for="edit-tipo-doc">Tipo de documento*</label>
+                <select class="custom-select" id="edit-tipo-doc" name="tipo_doc">
+                  <option>CI</option>
+                  <option>CUIT</option>
+                  <option selected>DNI</option>
+                  <option>EXT</option>
+                  <option>LC</option>
+                  <option>LE</option>
+                  <option>PAS</option>
+                </select>
+              </div>
+              <div class="form-group col-12 col-lg-6 px-1">
+                <label for="edit-doc">Número de documento*</label>
+                <input type="number" class="form-control" id="edit-doc" name="doc" value="">
+              </div>
+              <small class="col-12">
+                Si tu búsqueda es por Documento, y tu DNI es menor a 10.000.000, utilizá las opciones de Libreta de Enrolamiento (LE) o Libreta Cívica (LC). Consultá los
+                <a href="https://buenosaires.gob.ar/terminos-y-condiciones-consulta-de-infracciones">términos y condiciones.</a>
+              </small>
+            </div>
 
-document.getElementById("radioDominio").onclick = () => {
-  panelDominio.classList.remove("d-none");
-  panelDocumento.classList.add("d-none");
-};
+            <input type="hidden" value="transito" name="filtro_acta">
 
-document.getElementById("radioDocumento").onclick = () => {
-  panelDocumento.classList.remove("d-none");
-  panelDominio.classList.add("d-none");
-};
-</script>
+            <div class="mt-2 flex-wrap d-none" id="panel-dominio">
+              <div class="form-group col-12 col-lg-6 px-1">
+                <label for="edit-dominio">Dominio*</label>
+                <input type="text" class="form-control" id="edit-dominio" name="dominio" value="">
+              </div>
+              <small class="col-12">Al escribir la patente no debe haber espacios.</small>
+            </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
+            <div class="infracciones-captcha ml-2 mt-2 mb-2 col-xs-12">
+              <fieldset>
+                <div class="g-recaptcha mobileCaptcha" data-sitekey="6LfcRGAlAAAAAJI0S2ABpxX_Wj56oioSE6y393OG"></div>
+                <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=ES"></script>
+              </fieldset>
+            </div>
+          </div>
+          <div class="w-100 mt-3 pt-3 text-right">
+            <button type="submit" class="btn btn-primary btn-lg">Consultar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="main-footer pie-final">
+    <div class="container">
+      <section>
+        <h4>Teléfonos útiles</h4>
+        <ul class="list-inline">
+          <li class="list-inline-item phone-items"><a href="tel:102">102 - Niñez y Adolescencia</a></li>
+          <li class="list-inline-item phone-items"><a href="tel:103">103 - Emergencias</a></li>
+          <li class="list-inline-item phone-items"><a href="tel:107">107 - SAME</a></li>
+          <li class="list-inline-item phone-items"><a href="tel:911">911 - Policía</a></li>
+          <li class="list-inline-item phone-items"><a href="tel:144">144 - Violencia de género</a></li>
+          <li class="list-inline-item phone-items"><a href="tel:147">147 - Atención ciudadana</a></li>
+        </ul>
+        <a href="https://www.buenosaires.gob.ar/laciudad/telefonosutiles">Ver todos los teléfonos</a>
+      </section>
+      <section>
+        <h4>Redes de la ciudad</h4>
+        <ul class="list-inline">
+          <li class="list-inline-item redes-items"><a href="https://www.facebook.com/GCBA"><i class="bx bxl-facebook"></i> Facebook</a></li>
+          <li class="list-inline-item redes-items"><a href="https://www.instagram.com/buenosaires"><i class="bx bxl-instagram"></i> Instagram</a></li>
+          <li class="list-inline-item redes-items"><a href="https://twitter.com/gcba"><i class="bx bxl-twitter"></i> Twitter</a></li>
+          <li class="list-inline-item redes-items"><a href="https://www.youtube.com/user/GCBA"><i class="bx bxl-youtube"></i> YouTube</a></li>
+          <li class="list-inline-item redes-items"><a href="https://ar.linkedin.com/company/gobierno-de-la-ciudad-de-buenos-aires"><i class="bx bxl-linkedin"></i> LinkedIn</a></li>
+        </ul>
+      </section>
+    </div>
+    <hr class="divider">
+    <div class="container">
+      <section class="footer-legal-section">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-5 col-xl-4 footer-content-img">
+            <img class="d-lg-none" src="./assets/img/ciudad-ba-sm.svg" alt="Ciudad de Buenos Aires" height="48">
+            <img class="d-none d-lg-inline" src="./assets/img/ciudad-ba.svg" alt="Ciudad de Buenos Aires" height="40">
+            <img class="img-vamos-ba" src="./assets/img/vamos-ba.svg" alt="Vamos Buenos Aires">
+          </div>
+          <div class="col-12">
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="https://boletinoficial.buenosaires.gob.ar">Boletín oficial</a></li>
+              <li class="list-inline-item"><a href="https://buenosaires.gob.ar/jefaturadegabinete/innovacion/terminos-y-condiciones">Términos y condiciones</a></li>
+              <li class="list-inline-item"><a href="https://www.buenosaires.gob.ar/privacidad">Política de privacidad</a></li>
+              <li class="list-inline-item"><a href="https://buenosaires.gob.ar/jefedegobierno/legalytecnica/normativa/boletin-oficial-y-registro/oficios-judiciales">Oficios judiciales</a></li>
+              <li class="list-inline-item"><a href="https://www.buenosaires.gob.ar/gobierno/transparencia">Transparencia</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="footer-license-text">
+          Los contenidos de buenosaires.gob.ar están licenciados bajo Creative Commons Reconocimiento 2.5 Argentina License.
+        </div>
+      </section>
+    </div>
+  </footer>
+
 </body>
-  </html>
-
+</html>
