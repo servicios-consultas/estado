@@ -2,130 +2,129 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Infracciones BA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consulta de infracciones</title>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-  <!-- CSS React -->
-  <link rel="stylesheet" href="css/react_main.44d35ff5.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </head>
 
 <body>
 
-<div class="wrapper" role="main">
+<article class="pb-5 mb-4">
 
   <!-- HEADER -->
-  <header id="top" class="document-main-head logos-sup">
+  <header class="bg-light pt-3 pb-5 mb-5">
     <div class="container">
-      <div class="row">
-        <div class="col-md-3 text-center">
-          <img src="https://infraccionesba.gba.gob.ar/img/inf_ba.svg" width="280" height="53" alt="InfraccionesBA">
-        </div>
-        <div class="col-md-6"></div>
-        <div class="col-md-3 text-center">
-          <a href="http://www.gob.gba.gov.ar/portal/index.php">
-            <img src="https://infraccionesba.gba.gob.ar/img/institucional2.svg" width="240" height="90" alt="Institucional">
-          </a>
-        </div>
-      </div>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Buenos Aires</a></li>
+          <li class="breadcrumb-item"><a href="#">Justicia y Seguridad</a></li>
+          <li class="breadcrumb-item"><a href="#">Infracciones</a></li>
+          <li class="breadcrumb-item active">Consulta de infracciones</li>
+        </ol>
+      </nav>
+
+      <h1 class="mb-3">Consulta de infracciones de tránsito y scoring</h1>
+      <p class="lead">
+        Accedé a la información de tránsito pendiente de pago y tu puntaje, en la Ciudad de Buenos Aires.
+      </p>
+
+      <p class="m-0">
+        Modalidad:
+        <span class="badge badge-secondary ml-2">Presencial</span>
+        <span class="badge badge-secondary">En línea</span>
+      </p>
+
     </div>
   </header>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="container">
+  <!-- FORMULARIO -->
+  <div class="container">
+    <form id="infracciones-form">
 
-      <div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-					</button>
-				</div>
+      <div class="card p-4">
+        <h3 class="mb-3">Quiero datos sobre</h3>
 
-      <div class="collapse navbar-collapse" id="navbar-wrap">
+        <!-- Radios -->
+        <div class="d-flex mb-3">
+          <div class="custom-control custom-radio mr-4">
+            <input class="custom-control-input" type="radio" name="tipo" id="radioDoc" checked>
+            <label class="custom-control-label" for="radioDoc">Un documento</label>
+          </div>
 
-        <ul class="nav navbar-nav">
-          <li><a href="home">Inicio</a></li>
-          <li><a href="consulta-infraccion">Infracciones</a></li>
-          <li><a href="ubicacion-juzgado">Juzgados</a></li>
-          <li><a href="equiposDeConstatacion">Radares</a></li>
-          <li><a href="/rest/redirect-sso">Mi Web</a></li>
-          <li><a href="/rest/redirect-sso">Cargar DI</a></li>
+          <div class="custom-control custom-radio">
+            <input class="custom-control-input" type="radio" name="tipo" id="radioDom">
+            <label class="custom-control-label" for="radioDom">Una patente</label>
+          </div>
+        </div>
 
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Ayuda <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="descarga-documento">Instructivos</a></li>
-              <li><a href="preguntas-frecuentes">Preguntas Frecuentes</a></li>
-            </ul>
-          </li>
-        </ul>
+        <!-- PANEL DOCUMENTO -->
+        <div id="panel-documento">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label>Tipo de documento</label>
+              <select class="custom-select">
+                <option>DNI</option>
+                <option>CI</option>
+                <option>CUIT</option>
+                <option>LC</option>
+                <option>LE</option>
+                <option>PAS</option>
+              </select>
+            </div>
 
-        <div class="navbar-right">
-          <a href="/rest/redirect-sso" class="btn btn-default navbar-btn">
-            Acceso Usuarios
-          </a>
+            <div class="form-group col-md-6">
+              <label>Número de documento</label>
+              <input type="number" class="form-control">
+            </div>
+          </div>
+
+          <small class="text-muted">
+            Si tu DNI es menor a 10.000.000 utilizá LC o LE.
+          </small>
+        </div>
+
+        <!-- PANEL DOMINIO -->
+        <div id="panel-dominio" class="d-none">
+          <div class="form-group col-md-6 px-0">
+            <label>Dominio</label>
+            <input type="text" class="form-control">
+            <small class="text-muted">Sin espacios.</small>
+          </div>
+        </div>
+
+        <!-- CAPTCHA -->
+        <div class="mt-4">
+          <div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div>
         </div>
 
       </div>
-    </div>
-  </nav>
 
-  <!-- MODAL -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
-          <h4 class="modal-title">SELECCIONE A QUIEN QUIERE REPRESENTAR</h4>
-        </div>
-
-        <div class="modal-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>CUIL/CUIT</th>
-                <th>NOMBRE</th>
-                <th>TIPO OPERADOR</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- contenido dinámico -->
-            </tbody>
-          </table>
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <button class="btn btn-primary" data-dismiss="modal">Comenzar</button>
-        </div>
+      <div class="text-right mt-4">
+        <button class="btn btn-primary btn-lg">Consultar</button>
       </div>
 
-    </div>
+    </form>
   </div>
 
-  <!-- REACT ROOT -->
-  <div
-    id="root"
-    token="4e132302-47d5-43f6-ae7d-90b0c22adca4"
-    initialpage="INFRACTIONS_ROUTE"
-    captchasitekey="6LeGXnkUAAAAAGHv-jMgqrOMx4eqHCh3_fEeP9wR"
-    mostrardescargos="S">
-  </div>
+</article>
 
-</div>
+<!-- JS TOGGLE -->
+<script>
+  document.getElementById("radioDoc").addEventListener("change", () => {
+    document.getElementById("panel-documento").classList.remove("d-none");
+    document.getElementById("panel-dominio").classList.add("d-none");
+  });
 
-<!-- JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="js/react_main.a8d25205.js"></script>
+  document.getElementById("radioDom").addEventListener("change", () => {
+    document.getElementById("panel-documento").classList.add("d-none");
+    document.getElementById("panel-dominio").classList.remove("d-none");
+  });
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
 
 </body>
 </html>
